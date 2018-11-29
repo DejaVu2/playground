@@ -24,7 +24,7 @@ class MyPPOAgent(DockerAgentRunner):
 
     def act(self, observation, action_space):
         self.stackedobs = np.roll(self.stackedobs, shift=-1, axis=-1)
-        obs = featurize(observation)
+        obs = docker_featurize(observation)
         self.stackedobs[..., -obs.shape[-1]:] = obs
         action, _, _, _ = self.model.step(self.stackedobs)
         return int(action)
@@ -55,12 +55,12 @@ def main():
                       # total_timesteps=int(1e7),
                       total_timesteps=int(0),
                       save_interval=10,
-                      load_path='00025',
+                      load_path='00030',
                       )
 
-    agent = MyPPOAgent()
-    agent.initialize(model)
-    agent.run()
+        agent = MyPPOAgent()
+        agent.initialize(model)
+        agent.run()
 
 
 if __name__ == "__main__":

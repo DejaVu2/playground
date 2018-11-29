@@ -4,10 +4,11 @@ ADD ./examples/ppo-agent /agent
 
 # @TODO to be replaced with `pip install pommerman`
 ADD . /pommerman
-RUN cd /pommerman && pip install . && \
-    pip install tensorflow-gpu && \
-    cd /baselines && \
-    pip install -e .
+RUN cd /pommerman && pip install .  && \
+    pip install tensorflow-gpu  && \
+    cd /pommerman/baselines && \
+    pip install -e .  && \
+    pip install pandas 
 # end @TODO
 
 EXPOSE 10080
